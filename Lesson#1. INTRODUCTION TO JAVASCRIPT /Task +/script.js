@@ -1,3 +1,5 @@
+// Створіть веб-додаток для визначення купе в плацкартному вагоні за номером квитка. Користувач вводить номер місця, вивести йому номер купе, тип місця - бічне чи ні, верхнє чи нижнє.
+
 const findSeatButton = document.getElementById("button");
 const seatNumberInput = document.getElementById("seatNumber");
 const resultDiv = document.getElementById("result");
