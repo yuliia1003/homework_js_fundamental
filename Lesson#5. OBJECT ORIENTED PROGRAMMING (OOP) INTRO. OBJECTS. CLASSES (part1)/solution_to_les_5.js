@@ -38,7 +38,7 @@ class Circle {
   }
 
   toString() {
-    return `Circle with center at point (${this.x}, ${this.y}) and radius ${this.radius}.`
+    return `Circle with center at point (${this.x}, ${this.y}) and radius ${this.radius}.`;
   }
 }
 
@@ -53,7 +53,7 @@ class Circle {
 // propsCount(mentor);  // 3
 
 function propsCount(currentObject) {
-    return Object.keys(currentObject).length;
+  return Object.keys(currentObject).length;
 }
 
 // 3.
@@ -61,16 +61,41 @@ function propsCount(currentObject) {
 // - Від класу Person наслідується клас Student, конструктор якого крім name і surname, приймає параметр year (рік вступу до університету).
 // - В класі Student необхідно перевизначити метод showFullName(midleName), щоб виводилося не лише ім’я, прізвище, але і по-батькові (midleName) студента.
 // - Також в класі Student необхідно реалізувати метод showCourse(), який виводитиме поточний курс студента (від 1 до 6). Значення курсу визначатиметься як різниця поточного року (визначити самостійно) і року вступу до ВНЗ.
-// Приклад результату:
-// const stud1 = new Student("Petro", "Petrenko", 2019);
-// console.log(stud1.showFullName("Petrovych")); // Petrenko Petro Petrovych
-// console.log("Current course: " + stud1.showCourse()); //Current course: 4
 
+class Person {
+  constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
 
+  showFullName() {
+    return `${this.surname} ${this.name}`;
+  }
+}
 
+class Student extends Person {
+  constructor(name, surname, year) {
+    super(name, surname);
+    this.year = year;
+  }
+  showFullName(midleName) {
+    return `${this.surname} ${this.name} ${midleName}`;
+  }
 
-// [14:35]
-// 5. OBJECT ORIENTED PROGRAMMING (OOP) INTRO. OBJECTS. CLASSES (part2)
+  showCourse() {
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+    if (currentMonth < 9) {
+      return currentYear - this.year;
+    }
+    return currentYear - this.year + 1;
+  }
+}
+
+const stud1 = new Student("Petro", "Petrenko", 2019);
+console.log(stud1.showFullName("Petrovych")); // Petrenko Petro Petrovych
+console.log("Current course: " + stud1.showCourse()); //Current course: 4
+
 // 4.
 // А. Реалізувати клас, який описує простий маркер. У класі мають бути такі компоненти:
 // - поле, яке зберігає колір маркера;
@@ -78,6 +103,50 @@ function propsCount(currentObject) {
 // - метод друку (метод приймає рядок і виводить текст відповідним кольором;
 // текст виводиться до тих пір, поки в маркері є чорнило; один не пробіловий символ – це 0,5% чорнила в маркері).
 // В. Реалізувати клас, що описує маркер, що заправляється, успадкувавши його від простого маркера і додавши метод для заправки маркера. Продемонструвати роботу написаних методів
+
+class Marker {
+  constructor(color, inkLevel) {
+    this.color = color;
+    this.inkLevel = inkLevel;
+  }
+
+  print(text) {
+    let printedText = "";
+    for (let i = 0; i < text.length; i++) {
+      if (this.inkLevel >= 0.5) {
+        printedText += text[i];
+        if (text[i] !== " ") {
+          this.inkLevel -= 0.5;
+        }
+      }
+    }
+    console.log("%c" + printedText, "color:" + this.color);
+  }
+}
+
+class RefillMarker extends Marker {
+  refill() {
+    this.inkLevel = 100;
+  }
+}
+
+//перевірка
+const redMarker = new Marker("red", 3);
+redMarker.print("This is a red marker.");
+
+const greenMarker = new Marker("green", 100);
+greenMarker.print("Green color next");
+
+const nullMarker = new Marker("black", 0);
+nullMarker.print("This text dosen`t print");
+
+const refillRedMarker = new RefillMarker("red", 3);
+refillRedMarker.refill();
+refillRedMarker.print("This is a red marker.");
+
+const refillNullMarker = new RefillMarker("black", 0);
+refillNullMarker.refill();
+refillNullMarker.print("I see this text!");
 
 // 5.
 // Створіть клас Worker який буде мати конструктор, який приймає наступні властивості: fullName (ім’я і прізвище), dayRate (ставка за день роботи), workingDays (кількість відпрацьованих днів).
