@@ -20,7 +20,7 @@ let secondItem = firstItem.nextElementSibling;
 let thirdItem = secondItem.nextElementSibling;
 let fourthItem = lastItem.previousElementSibling;
 
-console.log(
+alert(
   `${firstItem.textContent}, ${lastItem.textContent}, ${secondItem.textContent}, ${fourthItem.textContent}, ${thirdItem.textContent}`
 );
 
