@@ -135,7 +135,7 @@ const redMarker = new Marker("red", 3);
 redMarker.print("This is a red marker.");
 
 const greenMarker = new Marker("green", 100);
-greenMarker.print("Green color next");
+greenMarker.print("Green color text");
 
 const nullMarker = new Marker("black", 0);
 nullMarker.print("This text dosen`t print");
@@ -156,44 +156,77 @@ refillNullMarker.print("I see this text!");
 //         4) Вивести значення зарплати з новим experience.
 //         5) Створити кілька екземплярів класу (працівників) з різними зарплатами, як показано в прикладі нижче. Посортувати зарплату працівників із найбільшим experience по зростанню і вивести результат в форматі:   worker_fullName: salary_value
 //         6) Реалізувати динамічне сортування для будь-кої кількості працівників-екземплярів класу Worker.
-// [14:36]
-// Example usage:
-// let worker1 = new Worker("John Johnson", 20, 23);
-// console.log(worker1.fullName);
-// worker1.showSalary();
-// console.log("New experience: " + worker1.showExp);
-// worker1.showSalaryWithExperience();
-// worker1.setExp = 1.5;
-// console.log("New experience: " + worker1.showExp);
-// worker1.showSalaryWithExperience();
 
-// let worker2 = new Worker("Tom Tomson", 48, 22);
-// . . . . . .
+class Worker {
+  constructor(fullName, dayRate, workingDays) {
+    this.fullName = fullName;
+    this.dayRate = dayRate;
+    this.workingDays = workingDays;
+    this._experience = 1.2;
+  }
 
-// let worker3 = new Worker("Andy Ander", 29, 23);
-// . . . . . .
+  showSalary() {
+    return this.dayRate * this.workingDays;
+  }
 
-// Output example:
-// John Johnson
-// John Johnson salary: 460
-// New experience: 1.2
-// John Johnson salary: 552
-// New experience: 1.5
-// John Johnson salary: 690
+  showSalaryWithExperience() {
+    return this._experience * this.dayRate * this.workingDays;
+  }
 
-// Tom Tomson
-// Tom Tomson salary: 1056
-// . . . . . .
-// New experience: 1.5
-// Tom Tomson  salary: 1584
+  get showExp() {
+    return this._experience;
+  }
 
-// Andy Ander
-// Andy Ander salary: 667
-// . . . . . .
-// New experience: 1.5
-// Andy Ander  salary: 1000.5
+  set setExp(value) {
+    this._experience = value;
+  }
 
-// Sorted salary:
-// John Johnson: 690
-// Andy Ander: 1000.5
-// Tom Tomson: 1584
+  static sortSalary(workers) {
+    workers.sort(
+      (a, b) => a.showSalaryWithExperience() - b.showSalaryWithExperience()
+    );
+    for (let worker of workers) {
+      console.log(`${worker.fullName}: ${worker.showSalaryWithExperience()}`);
+    }
+  }
+}
+
+// Використання
+let worker1 = new Worker("John Johnson", 20, 23);
+console.log(worker1.fullName);
+console.log(`${worker1.fullName} salary: ${worker1.showSalary()}`);
+console.log(`New experience: ${worker1.showExp}`);
+console.log(
+  `${worker1.fullName} salary: ${worker1.showSalaryWithExperience()}`
+);
+worker1.setExp = 1.5;
+console.log("New experience: " + worker1.showExp);
+console.log(
+  `${worker1.fullName} salary: ${worker1.showSalaryWithExperience()}`
+);
+
+console.log("...");
+
+let worker2 = new Worker("Tom Tomson", 48, 22);
+console.log(worker2.fullName);
+console.log(`${worker2.fullName} salary: ${worker2.showSalary()}`);
+worker2.setExp = 1.5;
+console.log("New experience: " + worker2.showExp);
+console.log(
+  `${worker2.fullName} salary: ${worker2.showSalaryWithExperience()}`
+);
+console.log("...");
+
+let worker3 = new Worker("Andy Ander", 29, 23);
+console.log(worker3.fullName);
+console.log(`${worker3.fullName} salary: ${worker3.showSalary()}`);
+worker3.setExp = 1.5;
+console.log("New experience: " + worker3.showExp);
+console.log(
+  `${worker3.fullName} salary: ${worker3.showSalaryWithExperience()}`
+);
+
+console.log("...");
+
+console.log("Sorted salary:");
+Worker.sortSalary([worker1, worker2, worker3]);
