@@ -50,7 +50,8 @@ title.style.backgroundColor = "#90EE90";
 const myDiv = document.querySelector("#myDiv");
 myDiv.firstElementChild.style.fontWeight = "bold";
 myDiv.firstElementChild.nextElementSibling.style.color = "red";
-myDiv.lastElementChild.previousElementSibling.style.textDecoration = "underline";
+myDiv.lastElementChild.previousElementSibling.style.textDecoration =
+  "underline";
 myDiv.lastElementChild.style.fontStyle = "italic";
 
 const myList = document.querySelector("#myList");
@@ -85,7 +86,7 @@ const body = document.body;
 const main = document.createElement("main");
 main.classList.add("mainClass", "check", "item");
 
-const myDiv = document.createElement("div")
+const myDiv = document.createElement("div");
 myDiv.id = "myDiv";
 
 const paragraph = document.createElement("p");
@@ -100,13 +101,30 @@ body.appendChild(main);
 // Задача описана в блоці JS
 // https://codepen.io/misha_klymenko/pen/Jjabvez
 
-
 // 5.
 // Задача описана в блоці JS
 // https://codepen.io/misha_klymenko/pen/abzLvqo
+
+const circles = document.querySelectorAll(".circle");
+
+circles.forEach((circle) => {
+  const anim = circle.getAttribute("data-anim");
+
+  circle.classList.add(anim);
+
+  if (circle.classList.contains(anim)) {
+    console.log(`Animation '${anim}' applied`);
+  } else {
+    console.log(`Animation '${anim}' not applied`);
+  }
+});
+
 // 6.
 // Задача описана в блоці JS
 // https://codepen.io/misha_klymenko/pen/dyjyeGO
+
+// в папці Task 6. Shoes
+
 // ⭐⭐⭐
 // (Ускладнене. Задача не оцінюється. Для тих, кому хочеться поробити ще щось)
 // Зробити електронний годинник у такому стилі.
