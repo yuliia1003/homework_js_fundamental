@@ -50,8 +50,7 @@ title.style.backgroundColor = "#90EE90";
 const myDiv = document.querySelector("#myDiv");
 myDiv.firstElementChild.style.fontWeight = "bold";
 myDiv.firstElementChild.nextElementSibling.style.color = "red";
-myDiv.lastElementChild.previousElementSibling.style.textDecoration =
-  "underline";
+myDiv.lastElementChild.previousElementSibling.style.textDecoration = "underline";
 myDiv.lastElementChild.style.fontStyle = "italic";
 
 const myList = document.querySelector("#myList");
@@ -101,6 +100,28 @@ body.appendChild(main);
 // Задача описана в блоці JS
 // https://codepen.io/misha_klymenko/pen/Jjabvez
 
+const form = document.querySelector(".array fieldset");
+const submitButton = form.querySelector(".btn");
+
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const inputs = form.querySelectorAll(".arr");
+
+  const outputDiv = document.createElement("div");
+  outputDiv.classList.add("output");
+
+  inputs.forEach((input) => {
+    const label = input.getAttribute("data-form");
+    const value = input.value;
+    const formattedData = `${label}: ${value}<br>`;
+    outputDiv.insertAdjacentHTML("beforeend", formattedData);
+  });
+
+  const outBlock = document.querySelector(".out");
+  outBlock.appendChild(outputDiv);
+});
+
 // 5.
 // Задача описана в блоці JS
 // https://codepen.io/misha_klymenko/pen/abzLvqo
@@ -125,8 +146,4 @@ circles.forEach((circle) => {
 
 // в папці Task 6. Shoes
 
-// ⭐⭐⭐
-// (Ускладнене. Задача не оцінюється. Для тих, кому хочеться поробити ще щось)
-// Зробити електронний годинник у такому стилі.
-// https://user-images.githubusercontent.com/9075641/182206079-7c4aa5f0-50d9-4808-bec7-6d3af7bdada9.gif
-//
+
